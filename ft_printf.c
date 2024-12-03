@@ -6,7 +6,7 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 22:55:47 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/02 23:11:53 by hhammouc         ###   ########.fr       */
+/*   Updated: 2024/12/03 03:14:15 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,48 @@
 
 int	printer(char format, va_list list)
 {
+	int	count;
+	char *str;
+	
+	count = 0;
 	if (format == 'd' || format == 'i')
-		ft_putnbr(va_arg(list,int));
+		count += ft_putnbr(va_arg(list, int));
 	else if (format == 'c')
-		ft_putchar(va_arg(list,int));
+		count += ft_putchar(va_arg(list,int));
 	else if (format == '%')
-		ft_putchar('%');
+		count += ft_putchar('%');
 	else if (format == 's')
-		ft_putstr(va_arg(list,char *));
-	return 0;
+	{
+		char *str = va_arg(list, char *);
+		if (!str)
+			str = "(null)";
+		count += ft_putstr(str);
+	}
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	int		i;
-
+	int		count;
 	va_list	list;
+
 	va_start(list,format);
-	
+	count = 0;
 	i = 0;	
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			printer(format[i], list);
+			count += printer(format[i], list);
 		}
 		else
-			ft_putchar(format[i]);
+			count += ft_putchar(format[i]);
 		i++;
 	}
-
 	va_end(list);
-	return (ft_strlen(format));
+	return (count);
 }
 
 int	main(void)

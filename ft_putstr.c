@@ -6,17 +6,23 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 18:47:07 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/02 22:20:57 by hhammouc         ###   ########.fr       */
+/*   Updated: 2024/12/03 02:57:52 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (s && s[i])
+	if (s == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (s[i])
 		write(1, &s[i++], 1);
+	return (i);
 }

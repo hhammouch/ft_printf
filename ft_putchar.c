@@ -6,13 +6,14 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:08:09 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/02 22:20:53 by hhammouc         ###   ########.fr       */
+/*   Updated: 2024/12/03 02:56:06 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }
