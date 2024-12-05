@@ -6,7 +6,7 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 22:56:17 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/05 00:45:51 by hhammouc         ###   ########.fr       */
+/*   Updated: 2024/12/05 02:26:05 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_putchar(char c);
 int	ft_putstr(char *s);
 int	ft_putunsigned(unsigned int n);
 int	ft_puthexa(unsigned int nb, char format);
-int ft_putaddress(unsigned long n);
+int	ft_putaddress(unsigned long n);
 
 #endif

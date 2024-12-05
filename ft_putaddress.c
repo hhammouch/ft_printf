@@ -6,7 +6,7 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 00:38:35 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/05 00:45:10 by hhammouc         ###   ########.fr       */
+/*   Updated: 2024/12/05 02:35:39 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 int	ft_putaddress(unsigned long n)
 {
-	char nbr[16];
-    char *symbols;
-    int count;
-    int i;
+	char	nbr[16];
+	char	*symbols;
+	int		count;
+	int		i;
 
 	count = 0;
 	symbols = "0123456789abcdef";
 	if (n == 0)
-    {
-        write(1, "(nil)", 5);
-        return (5);
-    }
+		return (ft_putstr("(nil)"));
 	write(1, "0x", 2);
-    count += 2;
+	count += 2;
 	i = 0;
-    while (n)
-    {
-        nbr[i] = symbols[n % 16];
-        n /= 16;
-        i++;
-    }
+	while (n)
+	{
+		nbr[i] = symbols[n % 16];
+		n /= 16;
+		i++;
+	}
 	while (i > 0)
-    {
-        write(1, &nbr[--i], 1);
-        count++;
-    }
+	{
+		write(1, &nbr[--i], 1);
+		count++;
+	}
 	return (count);
 }

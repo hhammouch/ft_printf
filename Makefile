@@ -1,29 +1,23 @@
 NAME = ft_printf.a
-CC = cc
 CFLAGS = -Wall -Wextra -Werror
-AR = ar rc
-RM = rm -f
+CC = cc
+SRCS = ft_putnbr.c ft_putchar.c ft_putstr.c ft_putunsigned.c \
+      ft_puthexa.c ft_putaddress.c ft_printf.c
 
-SRC = ft_putnbr.c ft_putchar.c ft_putstr.c ft_putunsigned.c \
-		ft_puthexa.c ft_putaddress.c
-
-OBJ = $(SRC:.c=.o)
-
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	ar rcs $@ $^
 
-%.o: %.c
+%.o: %.c ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: clean
