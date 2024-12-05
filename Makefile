@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
 RM = rm -f
 
-SRC = ft_putnbr.c ft_putchar.c ft_strlen.c ft_putstr.c
+SRC = ft_putnbr.c ft_putchar.c ft_putstr.c ft_putunsigned.c \
+		ft_puthexa.c ft_putaddress.c
 
 OBJ = $(SRC:.c=.o)
 

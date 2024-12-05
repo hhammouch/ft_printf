@@ -1,52 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_puthexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 10:18:34 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/04 16:47:45 by hhammouc         ###   ########.fr       */
+/*   Created: 2024/12/04 16:18:26 by hhammouc          #+#    #+#             */
+/*   Updated: 2024/12/05 00:21:28 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_putnbr_convert(long nb, char nbr[11])
+char	*ft_putx(char format)
 {
-	size_t	i;
+	char	*base;
 
-	i = 0;
-	while (nb)
-	{
-		nbr[i] = nb % 10 + 48;
-		nb /= 10;
-		i++;
-	}
-	return (i);
+	if (format == 'x')
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	return (base);
 }
 
-int	ft_putnbr(int n)
+int	ft_puthexa(unsigned int nb, char format)
 {
-	long	nb;
-	size_t	i;
-	char	nbr[11];
 	int		count;
+	int		i;
+	char	*base;
+	char	nbr[8];
 
-	nb = n;
 	count = 0;
 	if (nb == 0)
 	{
 		write(1, "0", 1);
 		return (1);
 	}
-	if (nb < 0)
+	i = 0;
+	base = ft_putx(format);
+	while (nb)
 	{
-		nb = -nb;
-		write(1, "-", 1);
-		count++;
+		nbr[i] = base[nb % 16];
+		nb /= 16;
+		i++;
 	}
-	i = ft_putnbr_convert(nb, nbr);
 	while (i > 0)
 	{
 		write(1, &nbr[--i], 1);

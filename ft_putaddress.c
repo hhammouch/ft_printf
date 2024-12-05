@@ -1,56 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putaddress.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 10:18:34 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/04 16:47:45 by hhammouc         ###   ########.fr       */
+/*   Created: 2024/12/05 00:38:35 by hhammouc          #+#    #+#             */
+/*   Updated: 2024/12/05 00:45:10 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_putnbr_convert(long nb, char nbr[11])
+int	ft_putaddress(unsigned long n)
 {
-	size_t	i;
+	char nbr[16];
+    char *symbols;
+    int count;
+    int i;
 
-	i = 0;
-	while (nb)
-	{
-		nbr[i] = nb % 10 + 48;
-		nb /= 10;
-		i++;
-	}
-	return (i);
-}
-
-int	ft_putnbr(int n)
-{
-	long	nb;
-	size_t	i;
-	char	nbr[11];
-	int		count;
-
-	nb = n;
 	count = 0;
-	if (nb == 0)
-	{
-		write(1, "0", 1);
-		return (1);
-	}
-	if (nb < 0)
-	{
-		nb = -nb;
-		write(1, "-", 1);
-		count++;
-	}
-	i = ft_putnbr_convert(nb, nbr);
+	symbols = "0123456789abcdef";
+	if (n == 0)
+    {
+        write(1, "(nil)", 5);
+        return (5);
+    }
+	write(1, "0x", 2);
+    count += 2;
+	i = 0;
+    while (n)
+    {
+        nbr[i] = symbols[n % 16];
+        n /= 16;
+        i++;
+    }
 	while (i > 0)
-	{
-		write(1, &nbr[--i], 1);
-		count++;
-	}
+    {
+        write(1, &nbr[--i], 1);
+        count++;
+    }
 	return (count);
 }
