@@ -6,7 +6,7 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 22:55:47 by hhammouc          #+#    #+#             */
-/*   Updated: 2024/12/05 17:29:18 by hhammouc         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:34:14 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	printer(char format, va_list list)
 		count += ft_putunsigned(va_arg(list, unsigned int));
 	else if (format == 'x' || format == 'X')
 		count += ft_puthexa(va_arg(list, unsigned int), format);
+	else if (format == '%')
+		count += ft_putchar('%');
 	else if (format == 'p')
 		count += ft_putaddress(va_arg(list, unsigned long));
 	else if (format == 's')
@@ -35,22 +37,6 @@ int	printer(char format, va_list list)
 			str = "(null)";
 		count += ft_putstr(str);
 	}
-	return (count);
-}
-
-int	handle(const char *format, int *i, va_list list)
-{
-	int	count;
-
-	count = 0;
-	(*i)++;
-	if (format[*i] == '%')
-	{
-		count += ft_putchar('%');
-		(*i)++;
-	}
-	else
-		count += printer(format[*i], list);
 	return (count);
 }
 
@@ -68,12 +54,13 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-			count += handle(format, &i, list);
-		else
 		{
-			count += ft_putchar(format[i]);
 			i++;
+			count += printer(format[i], list);
 		}
+		else
+			count += ft_putchar(format[i]);
+		i++;
 	}
 	va_end(list);
 	return (count);
